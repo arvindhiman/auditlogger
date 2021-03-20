@@ -18,16 +18,18 @@ Run "MovieApplication" Spring Boot application.
 
 Using basic auth username and password setup in UserDetailsService invoke API in Postman: http://localhost:8080/movies
 
-Browse to DynamoDB table in AWS console to view logged items. This project stores following attributes in DynamoDB table:
+Browse to DynamoDB table in AWS console to view logged items. 
+
+Following attributes are stored in DynamoDB table:
 
 * app_id
 * timestamp
-* request_time
-* response_time
-* time_taken
-* status
-* uri
-* user
+* request_time 
+* response_time 
+* time_taken = (response_time - request_time) milliseconds
+* status = HTTP Status
+* uri = GET /movies
+* user = authenticated username
 
 
 
