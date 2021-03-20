@@ -1,6 +1,10 @@
 package org.example.audit;
 
 import ch.qos.logback.access.tomcat.LogbackValve;
+import org.example.audit.model.Movie;
+import org.example.audit.model.MovieRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;
@@ -13,7 +17,10 @@ import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.dynamodb.DynamoDbClient;
 
 @SpringBootApplication
-public class MovieApplication {
+public class MovieApplication implements CommandLineRunner {
+
+	@Autowired
+	MovieRepository movieRepository;
 
 	@Bean
 	public DynamoDbClient dynamoDbClient() {
@@ -50,4 +57,19 @@ public class MovieApplication {
         SpringApplication.run(MovieApplication.class, args);
     }
 
+	@Override
+	public void run(String... args) throws Exception {
+
+		addMovie("Sholay");
+		addMovie("Batman");
+		addMovie("Star Wars");
+		addMovie("Spider Man");
+
+	}
+
+	private void addMovie(String name) {
+		Movie movie1 = new Movie();
+		movie1.setName(name);
+		movieRepository.save(movie1);
+	}
 }

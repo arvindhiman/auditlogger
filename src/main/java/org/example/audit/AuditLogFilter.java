@@ -31,10 +31,6 @@ public class AuditLogFilter implements Filter {
     @Value( "${app.id}" )
     private String appId;
 
-    public void setAppId(String appId) {
-        this.appId = appId;
-    }
-
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
 
@@ -51,7 +47,7 @@ public class AuditLogFilter implements Filter {
         itemValues.put("app_id", AttributeValue.builder().s(appId).build());
         itemValues.put("timestamp", AttributeValue.builder().n(String.valueOf(startAt)).build());
         itemValues.put("uri", AttributeValue.builder().s(req.getMethod() + " " + req.getRequestURI()).build());
-        itemValues.put("requestTime", AttributeValue.builder().s(String.valueOf(new Date())).build());
+        itemValues.put("request_time", AttributeValue.builder().s(String.valueOf(new Date())).build());
 
         filterChain.doFilter(req, res);
         long endAt = System.currentTimeMillis();
@@ -64,10 +60,10 @@ public class AuditLogFilter implements Filter {
 
         }
 
-        itemValues.put("responseTime", AttributeValue.builder().s(String.valueOf(new Date())).build());
+        itemValues.put("responss_time", AttributeValue.builder().s(String.valueOf(new Date())).build());
         itemValues.put("user", AttributeValue.builder().s(currentUserName).build());
         itemValues.put("status", AttributeValue.builder().s(HttpStatus.resolve(res.getStatus()).toString()).build());
-        itemValues.put("timeTaken", AttributeValue.builder().s(String.valueOf((endAt - startAt))).build());
+        itemValues.put("time_taken", AttributeValue.builder().s(String.valueOf((endAt - startAt))).build());
 
         PutItemRequest request = PutItemRequest.builder()
                 .tableName(tableName)
