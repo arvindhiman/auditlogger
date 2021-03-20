@@ -4,3 +4,15 @@ This project shows how http request and response can be logged in a DynamoDB tab
 2. Which functions are most used in the application and by whom
 
 This project is a spring boot application which utilizes filters to extract useful information from HTTP request and response. It uses DynamoDB client to store extracted information in AWS DynamoDB table.
+
+# Setup
+Create a DynamoDB table in region us-west-2:
+1. Table name:	AUDIT_LOG
+2. Primary partition key:	app_id (String)
+3. Primary sort key:	timestamp (Number)
+
+Follow AWS SDK [instructions](https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/get-started.html) to configure user credentials.
+
+# How to run
+Run "MovieApplication" Spring Boot application.
+
