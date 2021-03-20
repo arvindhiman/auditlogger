@@ -16,3 +16,18 @@ Follow AWS SDK [instructions](https://docs.aws.amazon.com/sdk-for-java/latest/de
 # How to run
 Run "MovieApplication" Spring Boot application.
 
+Using basic auth username and password setup in UserDetailsService invoke API in Postman: http://localhost:8080/movies
+
+Browse to DynamoDB table in AWS console to view logged items. This project stores following attributes in DynamoDB table:
+
+* app_id
+* timestamp
+* request_time
+* response_time
+* time_taken
+* status
+* uri
+* user
+
+
+
