@@ -1,11 +1,13 @@
 package org.example.audit;
 
 import ch.qos.logback.access.tomcat.LogbackValve;
+import io.micrometer.core.instrument.MeterRegistry;
 import org.example.audit.model.Movie;
 import org.example.audit.model.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.actuate.autoconfigure.metrics.MeterRegistryCustomizer;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;
 import org.springframework.context.annotation.Bean;
@@ -51,6 +53,11 @@ public class MovieApplication implements CommandLineRunner {
 						.build();
 
 		return new InMemoryUserDetailsManager(user);
+	}
+
+	@Bean
+	MeterRegistryCustomizer<MeterRegistry> metricsCommonTags() {
+		return registry -> registry.config().commonTags("app-id", "my-audit-logger");
 	}
 
     public static void main(String[] args) {
