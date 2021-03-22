@@ -67,7 +67,7 @@ api_request_total{app_id="my-audit-logger",uri="/actuator/prometheus",user="gabb
 
 You can add this metric to your grafana dashboard.
 
-![grafana image](https://github.com/arvindhiman/auditlogger/blob/[branch]/image.jpg?raw=true)
+![grafana image](https://github.com/arvindhiman/auditlogger/blob/main/grafana.png?raw=true)
 
 
 
